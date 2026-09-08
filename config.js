@@ -12,7 +12,7 @@ const CONFIG = {
         realName: "Radhika",      // Real name (used in special moments)
     },
     creator: {
-        name: "Digital",          // Your sign-off name
+        name: "Earth",          // Your sign-off name
         signOff: "XOXO",         // Sign-off text on love notes
     },
 
@@ -51,10 +51,22 @@ const CONFIG = {
         },
     ],
 
-    // ─── Intro Photo ───
-    // The single visual shown before the story begins.
-    introImage: "photos/Her photos/Photo 2_Cover image_highest priority.jpeg",
-    introImageAlt: "Jupiter",
+    // ─── Photos / Memories ───
+    // Add your photos to the /photos folder and list them here
+    // Set photosEnabled to false to skip this section
+    photosEnabled: true,
+    photos: [
+        { type: "image", src: "photos/Her photos/Photo 1_medium priority.jpeg", caption: "A beautiful you" },
+        { type: "image", src: "photos/Her photos/Photo 2_Cover image_highest priority.jpeg", caption: "My favorite cover photo" },
+        { type: "image", src: "photos/Her photos/Photo 3_she sent me random_low priority.jpeg", caption: "The random moments I love" },
+        { type: "image", src: "photos/Her photos/Photo 4_she sent me random_lower priority.jpeg", caption: "Another little memory" },
+        { type: "image", src: "photos/Her photos/Photo 5_her cute candid photo.jpeg", caption: "Your cutest candid" },
+        { type: "image", src: "photos/Her photos/Photo 6_her another cute candid photo.jpeg", caption: "That smile" },
+        { type: "image", src: "photos/Her photos/Photo 7_joke photo_high priority_another cover photo.jpeg", caption: "Us being ridiculous" },
+        { type: "image", src: "photos/Our together photos/Photo 1_somewhat good photo.jpeg", caption: "Us together" },
+        { type: "image", src: "photos/Our together photos/Photo 2_bad photo_she blinked.jpeg", caption: "Even the imperfect ones matter" },
+        { type: "video", src: "photos/Her video playing a song on keyboad_she's very talented.mp4", caption: "You playing beautifully" }
+    ],
 
     // ─── "Open When..." Envelopes ───
     // Set envelopesEnabled to false to skip this section
@@ -78,7 +90,7 @@ const CONFIG = {
         {
             label: "Open when you can't sleep",
             emoji: "🌙",
-            message: "Can't sleep? Neither can I, probably. I'm probably up thinking about something you said three weeks ago that made me smile. Close your eyes. I'll be in your dreams. Hopefully the good ones. 🌟"
+            message: "Can't sleep? Neither can I, probably. I'm probably up thinking about something you said three days ago that made me smile. Close your eyes. I'll be in your dreams. Hopefully the good ones. 🌟"
         },
         {
             label: "Open when you wonder why I love you",
@@ -111,14 +123,14 @@ const CONFIG = {
 
     // ─── Love Note ───
     loveNoteEnabled: true,
-    loveNote: "I love how we can be silly, serious, and everything in between. You make me want to be a better person (though i am pretty awesome guy as is :) ).\nYou are my Mahayagya Ka Puraskaar tbh.",
+    loveNote: "I love how we can be silly, serious, and everything in between. You make me want to be a better person (though i am pretty awesome guy as is :) ).\nYou are my Mahayagya Ka Puraskaar, as Yashpal sir would say...",
 
     // ─── Celebration (after YES) ───
     celebration: {
         confetti: true,
         hearts: true,
         fireworks: true,
-        endingMessage: "It's official. Now go call me. 😌",
+        endingMessage: "It's official then. Yayyyyyy!! 😌",
         // Alternative endings you can swap in:
         // "Mission accomplished. You have successfully made one person very happy. ❤️"
         // "Okay, now screenshot this. I want proof. 😌"
@@ -129,10 +141,10 @@ const CONFIG = {
         primaryPink: "#ff4d6d",
         softPink: "#ff8fa3",
         deepCrimson: "#c9184a",
-        bgDark: "#fff7fa",
-        bgDarkAlt: "#ffe8ef",
-        textLight: "#3d1d2a",
-        textMuted: "#925269",
-        glass: "rgba(255, 255, 255, 0.72)",
+        bgDark: "#1a0a10",
+        bgDarkAlt: "#2d0a1e",
+        textLight: "#fff0f3",
+        textMuted: "#ffb3c1",
+        glass: "rgba(255, 77, 109, 0.08)",
     }
 };
