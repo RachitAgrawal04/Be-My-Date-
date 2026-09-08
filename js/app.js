@@ -39,6 +39,7 @@ const App = {
         const noButton = document.getElementById('no-btn');
         const mainGif = document.getElementById('main-gif');
         const introPhoto = document.getElementById('intro-photo');
+        const galleryButton = document.getElementById('view-gallery-btn');
 
         if (question) question.textContent = CONFIG.question;
         if (yesButton) yesButton.textContent = CONFIG.yesText;
@@ -47,6 +48,12 @@ const App = {
         if (introPhoto) {
             introPhoto.src = CONFIG.introImage;
             introPhoto.alt = CONFIG.introImageAlt || CONFIG.recipient.name;
+        }
+        if (galleryButton) {
+            galleryButton.classList.toggle(
+                'hidden',
+                !(CONFIG.galleryEnabled && CONFIG.photos && CONFIG.photos.length)
+            );
         }
     },
 
