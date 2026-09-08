@@ -67,7 +67,7 @@ const CONFIG = {
         {
             label: "Open when you miss me",
             emoji: "🥺",
-            message: "I miss you too. Probably more than you miss me, if we're being honest. But hey — close your eyes, think of our dumbest conversation, and smile. I'm right there. 💫"
+            message: "Well obviously you do, everyone does ;) But seriously, I miss you too. Probably more than you miss me, if we're being honest. But hey — close your eyes, think of our dumbest conversation, and smile. I'm right there. 💫"
         },
         {
             label: "Open when you need a smile",
@@ -82,7 +82,7 @@ const CONFIG = {
         {
             label: "Open when you wonder why I love you",
             emoji: "💕",
-            message: "Because you're you. Because you laugh at my terrible jokes. Because you make the ordinary feel extraordinary. Because every moment with you feels like the universe finally got something right. 🌹"
+            message: "Because you're you. Because you laugh at my terrible jokes. Because you make the ordinary feel extraordinary. Because every moment with you feels like the universe finally got something right. Because whenever i am with you, clock ticks 10X faster than usual. 🌹"
         },
     ],
 
