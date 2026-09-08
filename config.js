@@ -62,7 +62,7 @@ const CONFIG = {
         {
             label: "Open when you're sad",
             emoji: "😢",
-            message: "Hey you. Whatever happened today, I need you to know — you are the most incredible person I know. And if the world is being mean to you, just remember: I'm always on your team. Always. ❤️"
+            message: "Hey you. Whatever happened today, I need you to know — you are the most incredible person I know. And if the world is being mean to you, just scream WOOOOOH on top of your lungs and remember: I'm always on your team. Always. ❤️"
         },
         {
             label: "Open when you miss me",
@@ -110,7 +110,7 @@ const CONFIG = {
 
     // ─── Love Note ───
     loveNoteEnabled: true,
-    loveNote: "I love how we can be silly, serious, and everything in between. You make me want to be a better person (though i am pretty awesome guy as is :) ).\nYou are my Mahayagya Ka Puraskaar, as Yashpal sir would say...",
+    loveNote: "I love how we can be silly, serious, and everything in between. I love your laugh and I love your smile. You make me want to be a better person (though i am pretty awesome guy as is :) ).\nYou are my Mahayagya Ka Puraskaar, as Yashpal sir would say...",
 
     // ─── Celebration (after YES) ───
     celebration: {
