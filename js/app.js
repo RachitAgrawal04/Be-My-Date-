@@ -125,7 +125,7 @@ const App = {
             card.append(element, caption);
             grid.appendChild(card);
         });
-    }
+    },
 
     showPhotoPlaceholder(card) {
         card.querySelector("img, video")?.remove();
