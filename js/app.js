@@ -13,6 +13,7 @@ const App = {
     init() {
         this.applyConfig();
         this.buildStoryScreens();
+        this.buildGallery();
         this.buildFlow();
         this.buildNavigation();
         this.bindEvents();
@@ -92,6 +93,53 @@ const App = {
         });
     },
 
+    buildGallery() {
+        const grid = document.getElementById('gallery-grid');
+        if (!grid || !CONFIG.galleryEnabled) return;
+
+        grid.replaceChildren();
+        (CONFIG.photos || []).forEach((media, index) => {
+            const card = document.createElement('article');
+            card.className = 'gallery-card';
+            card.dataset.mediaType = media.type === 'video' ? 'video' : 'image';
+            card.style.setProperty('--rotation', `${[-3, 2, -1, 3, -2][index % 5]}deg`);
+
+            const frame = document.createElement('div');
+            frame.className = 'gallery-media-frame';
+
+            const element = media.type === 'video'
+                ? document.createElement('video')
+                : document.createElement('img');
+
+            if (media.type === 'video') {
+                element.controls = true;
+                element.playsInline = true;
+                element.preload = 'metadata';
+                element.setAttribute('aria-label', media.caption || `Video memory ${index + 1}`);
+            } else {
+                element.loading = 'lazy';
+                element.alt = media.caption || `Memory ${index + 1}`;
+            }
+
+            element.src = media.src;
+            element.addEventListener('error', () => {
+                if (frame.querySelector('.gallery-placeholder')) return;
+                const placeholder = document.createElement('div');
+                placeholder.className = 'gallery-placeholder';
+                placeholder.textContent = 'Media unavailable';
+                frame.replaceChildren(placeholder);
+            });
+
+            const caption = document.createElement('p');
+            caption.className = 'gallery-caption';
+            caption.textContent = media.caption || '';
+
+            frame.appendChild(element);
+            card.append(frame, caption);
+            grid.appendChild(card);
+        });
+    },
+
     buildFlow() {
         this.flow = [];
 
@@ -133,6 +181,7 @@ const App = {
         const noteNotification = document.getElementById('note-notification');
         const closeNote = document.getElementById('close-note');
         const notePopup = document.getElementById('note-popup');
+        const galleryButton = document.getElementById('view-gallery-btn');
 
         if (intro) intro.addEventListener('click', () => this.start());
         if (envelopesContinue) envelopesContinue.addEventListener('click', () => this.goNext());
@@ -144,6 +193,7 @@ const App = {
                 if (event.target === notePopup) this.closeLoveNote();
             });
         }
+        if (galleryButton) galleryButton.addEventListener('click', () => this.showGallery());
     },
 
     showIntro() {
@@ -165,6 +215,18 @@ const App = {
 
     goNext() {
         this.goTo(this.currentIndex + 1);
+    },
+
+    showGallery() {
+        const celebration = document.getElementById('screen-celebration');
+        const gallery = document.getElementById('screen-gallery');
+        const dots = document.getElementById('nav-dots');
+
+        if (!gallery) return;
+        if (celebration) celebration.classList.remove('active');
+        if (dots) dots.classList.add('hidden');
+        gallery.scrollTop = 0;
+        gallery.classList.add('active');
     },
 
     goTo(index) {

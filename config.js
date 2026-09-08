@@ -55,6 +55,21 @@ const CONFIG = {
     introImage: "photos/Her photos/Photo 2_Cover image_highest priority.jpeg",
     introImageAlt: "Jupiter",
 
+    // ─── Final Gallery ───
+    galleryEnabled: true,
+    photos: [
+        { type: "image", src: "photos/Her photos/Photo 1_medium priority.jpeg", caption: "A beautiful you" },
+        { type: "image", src: "photos/Her photos/Photo 2_Cover image_highest priority.jpeg", caption: "My favorite cover photo" },
+        { type: "image", src: "photos/Her photos/Photo 3_she sent me random_low priority.jpeg", caption: "The random moments I love" },
+        { type: "image", src: "photos/Her photos/Photo 4_she sent me random_lower priority.jpeg", caption: "Another little memory" },
+        { type: "image", src: "photos/Her photos/Photo 5_her cute candid photo.jpeg", caption: "Your cutest candid" },
+        { type: "image", src: "photos/Her photos/Photo 6_her another cute candid photo.jpeg", caption: "That smile" },
+        { type: "image", src: "photos/Her photos/Photo 7_joke photo_high priority_another cover photo.jpeg", caption: "Us being ridiculous" },
+        { type: "image", src: "photos/Our together photos/Photo 1_somewhat good photo.jpeg", caption: "Us together" },
+        { type: "image", src: "photos/Our together photos/Photo 2_bad photo_she blinked.jpeg", caption: "Even the imperfect ones matter" },
+        { type: "video", src: "photos/Her video playing a song on keyboad_she's very talented.mp4", caption: "You playing beautifully" },
+    ],
+
     // ─── "Open When..." Envelopes ───
     // Set envelopesEnabled to false to skip this section
     envelopesEnabled: true,
@@ -107,6 +122,7 @@ const CONFIG = {
     musicEnabled: true,
     spotifyTrackId: "6rRqA9lDHi7KlhelFfbXCs", // Sway - Michael Bublé
     spotifyStartTime: 0, // seconds
+    spotifyAutoplay: true,
 
     // ─── Love Note ───
     loveNoteEnabled: true,

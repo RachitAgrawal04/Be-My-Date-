@@ -25,12 +25,16 @@ const Celebration = {
         // 3. Set celebration content
         const celebGif = document.getElementById('celebration-gif');
         const celebMsg = document.getElementById('celebration-message');
+        const galleryBtn = document.getElementById('view-gallery-btn');
 
         if (celebGif) {
             celebGif.src = CONFIG.celebrationGif;
         }
         if (celebMsg) {
             celebMsg.textContent = config.endingMessage || "She said YES!!! 🎉";
+        }
+        if (galleryBtn && CONFIG.galleryEnabled && CONFIG.photos && CONFIG.photos.length) {
+            galleryBtn.classList.remove('hidden');
         }
 
         // 4. Show music player
@@ -122,7 +126,13 @@ const Celebration = {
         const iframe = document.getElementById('spotify-iframe');
 
         if (iframe && CONFIG.spotifyTrackId) {
-            iframe.src = `https://open.spotify.com/embed/track/${CONFIG.spotifyTrackId}?utm_source=generator&theme=0&t=${CONFIG.spotifyStartTime || 0}`;
+            const params = new URLSearchParams({
+                utm_source: 'generator',
+                theme: '0',
+                t: String(CONFIG.spotifyStartTime || 0),
+                autoplay: CONFIG.spotifyAutoplay ? '1' : '0',
+            });
+            iframe.src = `https://open.spotify.com/embed/track/${CONFIG.spotifyTrackId}?${params}`;
         }
 
         // Auto-open the player
