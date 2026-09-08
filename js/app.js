@@ -7,13 +7,13 @@ const App = {
     flow: [],
     currentIndex: -1,
     storyTimer: null,
-    storyTypeTimer: null,
     storyRunId: 0,
     celebrationStarted: false,
 
     init() {
         this.applyConfig();
         this.buildStoryScreens();
+        this.buildPhotos();
         this.buildFlow();
         this.buildNavigation();
         this.bindEvents();
@@ -30,34 +30,19 @@ const App = {
         document.title = CONFIG.pageTitle || document.title;
 
         const description = document.querySelector('meta[name="description"]');
-        const ogTitle = document.querySelector('meta[property="og:title"]');
-        const ogDescription = document.querySelector('meta[property="og:description"]');
         if (description) {
             description.content = `A tiny corner of the internet, just for ${CONFIG.recipient.name}.`;
         }
 
         const question = document.getElementById('question-text');
-        const subtitle = document.getElementById('question-subtitle');
         const yesButton = document.getElementById('yes-btn');
         const noButton = document.getElementById('no-btn');
         const mainGif = document.getElementById('main-gif');
-        const introPhoto = document.getElementById('intro-photo');
 
         if (question) question.textContent = CONFIG.question;
-        if (subtitle) subtitle.textContent = CONFIG.subtitle || '';
-        if (ogTitle) ogTitle.content = CONFIG.pageTitle || document.title;
-        if (ogDescription) {
-            ogDescription.content = [CONFIG.question, CONFIG.subtitle]
-                .filter(Boolean)
-                .join(' ');
-        }
         if (yesButton) yesButton.textContent = CONFIG.yesText;
         if (noButton) noButton.textContent = CONFIG.noText;
         if (mainGif) mainGif.src = CONFIG.mainGif;
-        if (introPhoto) {
-            introPhoto.src = CONFIG.introImage;
-            introPhoto.alt = CONFIG.introImageAlt || CONFIG.recipient.name;
-        }
     },
 
     buildStoryScreens() {
@@ -103,6 +88,56 @@ const App = {
         });
     },
 
+    buildPhotos() {
+        const grid = document.getElementById("photos-grid");
+        if (!grid) return;
+
+        grid.replaceChildren();
+
+        (CONFIG.photos || []).forEach((media, index) => {
+            const card = document.createElement("article");
+            card.className = "photo-card";
+            card.style.setProperty(
+                "--rotation",
+                `${[-3, 2, -1, 3, -2][index % 5]}deg`
+            );
+
+            let element;
+
+            if (media.type === "video") {
+                element = document.createElement("video");
+                element.controls = true;
+                element.playsInline = true;
+                element.preload = "metadata";
+            } else {
+                element = document.createElement("img");
+                element.loading = "lazy";
+                element.alt = media.caption || `Memory ${index + 1}`;
+            }
+
+            element.src = media.src;
+            element.addEventListener("error", () => this.showPhotoPlaceholder(card));
+
+            const caption = document.createElement("p");
+            caption.className = "photo-caption";
+            caption.textContent = media.caption || "";
+
+            card.append(element, caption);
+            grid.appendChild(card);
+        });
+    }
+
+    showPhotoPlaceholder(card) {
+        card.querySelector("img, video")?.remove();
+
+        if (!card.querySelector(".photo-placeholder")) {
+            const placeholder = document.createElement("div");
+            placeholder.className = "photo-placeholder";
+            placeholder.textContent = "Media unavailable";
+            card.prepend(placeholder);
+        }
+    },
+
     buildFlow() {
         this.flow = [];
 
@@ -110,6 +145,13 @@ const App = {
             CONFIG.storyScreens.forEach((_, index) => {
                 this.flow.push({ id: `screen-story-${index}`, type: 'story', storyIndex: index });
             });
+        }
+
+        const photos = document.getElementById('screen-photos');
+        if (CONFIG.photosEnabled && CONFIG.photos.length && photos) {
+            this.flow.push({ id: 'screen-photos', type: 'photos' });
+        } else if (photos) {
+            photos.remove();
         }
 
         const envelopes = document.getElementById('screen-envelopes');
@@ -139,13 +181,16 @@ const App = {
 
     bindEvents() {
         const intro = document.getElementById('screen-intro');
+        const photosContinue = document.getElementById('photos-continue');
         const envelopesContinue = document.getElementById('envelopes-continue');
         const yesButton = document.getElementById('yes-btn');
         const noteNotification = document.getElementById('note-notification');
         const closeNote = document.getElementById('close-note');
         const notePopup = document.getElementById('note-popup');
+        const collageButton = document.getElementById('view-collage-btn');
 
         if (intro) intro.addEventListener('click', () => this.start());
+        if (photosContinue) photosContinue.addEventListener('click', () => this.goNext());
         if (envelopesContinue) envelopesContinue.addEventListener('click', () => this.goNext());
         if (yesButton) yesButton.addEventListener('click', () => this.sayYes());
         if (noteNotification) noteNotification.addEventListener('click', () => this.openLoveNote());
@@ -153,6 +198,12 @@ const App = {
         if (notePopup) {
             notePopup.addEventListener('click', (event) => {
                 if (event.target === notePopup) this.closeLoveNote();
+            });
+        }
+        if (collageButton) {
+            collageButton.addEventListener('click', () => {
+                const photosIndex = this.flow.findIndex((stage) => stage.type === 'photos');
+                if (photosIndex !== -1) this.goTo(photosIndex);
             });
         }
     },
@@ -183,8 +234,6 @@ const App = {
 
         this.storyRunId++;
         window.clearTimeout(this.storyTimer);
-        window.clearTimeout(this.storyTypeTimer);
-        this.storyTypeTimer = null;
 
         const previous = this.flow[this.currentIndex];
         if (previous) {
@@ -196,11 +245,6 @@ const App = {
         const stage = this.flow[index];
         const screen = document.getElementById(stage.id);
         if (!screen) return;
-
-        const celebrationScreen = document.getElementById('screen-celebration');
-        const dots = document.getElementById('nav-dots');
-        if (celebrationScreen) celebrationScreen.classList.remove('active');
-        if (dots) dots.classList.remove('hidden');
 
         screen.classList.add('active');
         this.updateNavigation();
@@ -256,10 +300,9 @@ const App = {
             if (position < characters.length) {
                 element.insertBefore(document.createTextNode(characters[position]), cursor);
                 position++;
-                this.storyTypeTimer = window.setTimeout(writeCharacter, 24);
+                window.setTimeout(writeCharacter, 24);
                 return;
             }
-            this.storyTypeTimer = null;
             cursor.remove();
             onComplete();
         };
