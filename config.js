@@ -101,20 +101,14 @@ const CONFIG = {
         },
     ],
 
-    // ─── No Button Behavior ───
-    // Options: "evader" | "teleporter" | "shrinker" | "fake" | "reverse" | "chaos"
-    noBehavior: "chaos",
-
-    // Reverse mode messages (shown in sequence when No is clicked)
-    reverseMessages: [
-        "No",
+    // ─── No Button Easter Egg ───
+    // This stays clickable: the joke is in the copy, not in blocking the choice.
+    noBehavior: "easterEgg",
+    noEggMessages: [
         "Are you sure?",
-        "Really sure? 🥺",
-        "Think again...",
-        "You're breaking my heart 💔",
-        "I'm gonna cry...",
-        "Okay fine... 😭",
-        "Just kidding, click Yes! 💕",
+        "You are making this unnecessarily difficult.",
+        "Okay. I respect your decision.",
+        "Just kidding. There is another button.",
     ],
 
     // ─── Music ───
