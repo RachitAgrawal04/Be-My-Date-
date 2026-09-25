@@ -56,7 +56,7 @@ You do not need to be a developer to customize this site!
 ## 💅 Design System & Aesthetics
 
 - **Glassmorphism UI**: Uses translucent, frosted-glass components for the UI cards to blend seamlessly with the animated backgrounds.
-- **Dynamic Theming**: Configured using CSS custom properties (`var(--primary-pink)`, etc.) for a cohesive, rich, and vibrant color palette.
+- **Dynamic Theming**: Configured using CSS custom properties (`var(--primary-pink)`, etc.) for a cohesive, rich, and vibrant color palette. It looks good for the love theme.
 - **Custom Typography**: Utilizes Google Fonts (*Dancing Script* for elegant headings, *Quicksand* for highly legible and modern body text).
 - **Ambient Animations**: Continuous CSS keyframe animations (floating, pulsing, gentle bobbing) keep the page feeling alive at all times without requiring user interaction.
 
