@@ -43,7 +43,7 @@ const CONTENT = {
         lines: [
             { text: "Hey, Jupiter.", pause: 2000 },
             { text: "I made you something.", pause: 2000 },
-            { text: "Again.", pause: 1800 },
+            { text: "Again...", pause: 1800 },
             { text: "Before you open it, promise me one thing.", pause: 0, waitForTap: true },
             { text: "Stay until the end.", pause: 1800 },
             { text: "I'm trusting you on this one.", pause: 0, small: true, waitForTap: true },
