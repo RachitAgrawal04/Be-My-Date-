@@ -491,3 +491,7 @@ const CONTENT = {
         spotifyStartTime: 0,
     },
 };
+
+// `const` declarations are not properties of `window`. Expose the content
+// configuration explicitly so the application can find it during startup.
+window.CONTENT = CONTENT;
